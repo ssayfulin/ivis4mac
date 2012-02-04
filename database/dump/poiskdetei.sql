@@ -2,7 +2,57 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `poiskdetei` DEFAULT CHARACTER SET latin1 ;
+DROP SCHEMA IF EXISTS `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+SHOW WARNINGS;
+DROP SCHEMA IF EXISTS `poiskdetei` ;
+CREATE SCHEMA IF NOT EXISTS `poiskdetei` ;
+SHOW WARNINGS;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`person`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`person` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person` (
+  `id_person` INT NOT NULL AUTO_INCREMENT ,
+  `first_name` VARCHAR(45) NULL DEFAULT NULL ,
+  `last_name` VARCHAR(45) NULL DEFAULT NULL ,
+  `third_name` VARCHAR(45) NULL DEFAULT NULL ,
+  `birth_date` DATE NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_person`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`person_to_relatives`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`person_to_relatives` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `mydb`.`person_to_relatives` (
+  `id_person_to_relative` INT NOT NULL ,
+  `id_person` INT NOT NULL ,
+  `id_relative` INT NOT NULL ,
+  PRIMARY KEY (`id_person_to_relative`) ,
+  INDEX `fk_person_to_relatives_person` (`id_person` ASC) ,
+  INDEX `fk_person_to_relatives_person1` (`id_relative` ASC) ,
+  CONSTRAINT `fk_person_to_relatives_person`
+    FOREIGN KEY (`id_person` )
+    REFERENCES `poiskdetei`.`person` (`id_person` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_person_to_relatives_person1`
+    FOREIGN KEY (`id_relative` )
+    REFERENCES `poiskdetei`.`person` (`id_person` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
 USE `poiskdetei` ;
 
 -- -----------------------------------------------------
@@ -10,66 +60,77 @@ USE `poiskdetei` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`country` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`country` (
   `id_country` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL COMMENT 'Russia, Belorussia, Ukraine, etc' ,
   PRIMARY KEY (`id_country`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`federal_subject`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`federal_subject` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`federal_subject` (
   `id_federal_subject` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id_federal_subject`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`district`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`district` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`district` (
   `id_district` INT NOT NULL AUTO_INCREMENT COMMENT 'http://ru.wikipedia.org/wiki/%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5_%D0%BE%D0%BA%D1%80%D1%83%D0%B3%D0%B0_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%BE%D0%B9_%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8' ,
   `description` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id_district`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`city`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`city` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`city` (
   `id_city` INT NOT NULL AUTO_INCREMENT ,
   `desription` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id_city`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`address_type`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`address_type` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`address_type` (
   `id_address_type` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL COMMENT 'Rogdenie, robata, work, nahgdenia, vstre4i,  \npoteralsa, naselsa, seksia, krugok, sportsal , basseyn, internat' ,
   PRIMARY KEY (`id_address_type`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`address`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`address` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`address` (
   `id_address` INT NOT NULL AUTO_INCREMENT ,
   `id_country` INT NOT NULL ,
@@ -113,39 +174,28 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`address` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `poiskdetei`.`person`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `poiskdetei`.`person` ;
-
-CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person` (
-  `id_person` INT NOT NULL AUTO_INCREMENT ,
-  `first_name` VARCHAR(45) NULL DEFAULT NULL ,
-  `last_name` VARCHAR(45) NULL DEFAULT NULL ,
-  `third_name` VARCHAR(45) NULL DEFAULT NULL ,
-  `birth_date` DATE NULL DEFAULT NULL ,
-  PRIMARY KEY (`id_person`) )
-ENGINE = InnoDB;
-
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`competance_type`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`competance_type` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`competance_type` (
   `id_competance_type` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id_competance_type`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`competance`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`competance` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`competance` (
   `id_competance` INT NOT NULL AUTO_INCREMENT ,
   `id_person` INT NOT NULL ,
@@ -166,24 +216,28 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`competance` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`transport_type`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`transport_type` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`transport_type` (
   `id_transport_type` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id_transport_type`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`transport`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`transport` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`transport` (
   `id_transport` INT NOT NULL ,
   `id_person` INT NOT NULL ,
@@ -204,24 +258,28 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`transport` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`status_type`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`status_type` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`status_type` (
   `id_status` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL COMMENT 'Manager seach, Partisipant seach, Lost, Operator, Coordinator seach, ' ,
   PRIMARY KEY (`id_status`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`status`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`status` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`status` (
   `id_person_status` INT NOT NULL AUTO_INCREMENT ,
   `id_person` INT NOT NULL ,
@@ -241,24 +299,28 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`status` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`equpement_type`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`equpement_type` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`equpement_type` (
   `id_equpement_type` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id_equpement_type`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`equpement`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`equpement` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`equpement` (
   `id_equpement` INT NOT NULL AUTO_INCREMENT ,
   `id_equpement_type` INT NOT NULL ,
@@ -279,24 +341,28 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`equpement` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`contact_type`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`contact_type` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`contact_type` (
   `id_contact_type` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL COMMENT 'mobile home, mobil work, mobil private  work phote, home phone, private phone, \nmail home, mail work, mail private,\nISC, skype, FaceBook, VKontacte, Twitter, etc. ' ,
   PRIMARY KEY (`id_contact_type`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`contact`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`contact` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`contact` (
   `id_contact` INT NOT NULL AUTO_INCREMENT ,
   `id_contact_type` INT NOT NULL ,
@@ -317,36 +383,42 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`contact` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`sign`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`sign` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`sign` (
   `id_sign` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL COMMENT 'rost, ves , glaza, teloslogenie, usi' ,
   PRIMARY KEY (`id_sign`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`sign_detail`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`sign_detail` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`sign_detail` (
   `id_sign_detail` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NULL DEFAULT NULL COMMENT '(rost)высокий, (telo)крепкого телосложения,( волосы) и (усы) седые' ,
   PRIMARY KEY (`id_sign_detail`) )
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`person_to_sign`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`person_to_sign` ;
 
+SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person_to_sign` (
   `id_person_sign` INT NOT NULL AUTO_INCREMENT ,
   `id_person` INT NOT NULL ,
@@ -373,6 +445,227 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person_to_sign` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`organization_type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`organization_type` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`organization_type` (
+  `id_organization_type` INT NOT NULL ,
+  `description` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_organization_type`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`organization`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`organization` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`organization` (
+  `id_organization` INT NOT NULL ,
+  `id_organization_type` INT NOT NULL ,
+  `id_address` INT NOT NULL ,
+  `name` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_organization`) ,
+  INDEX `fk_organization_organization_type1` (`id_organization_type` ASC) ,
+  INDEX `fk_organization_address1` (`id_address` ASC) ,
+  CONSTRAINT `fk_organization_organization_type1`
+    FOREIGN KEY (`id_organization_type` )
+    REFERENCES `poiskdetei`.`organization_type` (`id_organization_type` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_organization_address1`
+    FOREIGN KEY (`id_address` )
+    REFERENCES `poiskdetei`.`address` (`id_address` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`police_statement`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`police_statement` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`police_statement` (
+  `id_police_statement` INT NOT NULL ,
+  PRIMARY KEY (`id_police_statement`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`organization_to_contact`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`organization_to_contact` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`organization_to_contact` (
+  `id_organization_to_contact` INT NOT NULL ,
+  `id_organization` INT NOT NULL ,
+  `id_contact` INT NOT NULL ,
+  PRIMARY KEY (`id_organization_to_contact`) ,
+  INDEX `fk_organization_to_contact_organization1` (`id_organization` ASC) ,
+  INDEX `fk_organization_to_contact_contact1` (`id_contact` ASC) ,
+  CONSTRAINT `fk_organization_to_contact_organization1`
+    FOREIGN KEY (`id_organization` )
+    REFERENCES `poiskdetei`.`organization` (`id_organization` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_organization_to_contact_contact1`
+    FOREIGN KEY (`id_contact` )
+    REFERENCES `poiskdetei`.`contact` (`id_contact` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`map_link`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`map_link` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`map_link` (
+  `id_map_link` INT NOT NULL ,
+  `name` VARCHAR(45) NULL DEFAULT NULL ,
+  `longitude` FLOAT NULL DEFAULT NULL ,
+  `latitude` FLOAT NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_map_link`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`file_link`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`file_link` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`file_link` (
+  `id_file_link` INT NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
+  `link_value` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id_file_link`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`incident_state`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`incident_state` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`incident_state` (
+  `id_incident_state` INT NOT NULL ,
+  `description` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id_incident_state`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`incident`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`incident` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`incident` (
+  `id_incident` INT NOT NULL AUTO_INCREMENT ,
+  `id_incident_state` INT NOT NULL ,
+  `id_person_missing` INT NOT NULL ,
+  `id_person_coordinator` INT NOT NULL ,
+  `id_person_registrator` INT NOT NULL ,
+  `id_map_link` INT NOT NULL ,
+  `id_organization_coordinator` INT NOT NULL ,
+  `id_police_statement` INT NOT NULL ,
+  `date` DATETIME NOT NULL ,
+  `incident_registration_date` DATETIME NULL DEFAULT NULL ,
+  `description` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_incident`) ,
+  UNIQUE INDEX `id_idincindent_UNIQUE` (`id_incident` ASC) ,
+  INDEX `fk_incindent_map_link` (`id_map_link` ASC) ,
+  INDEX `fk_incindent_incident_state` (`id_incident_state` ASC) ,
+  INDEX `fk_incindent_person1` (`id_person_coordinator` ASC) ,
+  INDEX `fk_incindent_person2` (`id_person_missing` ASC) ,
+  INDEX `fk_incindent_person3` (`id_person_registrator` ASC) ,
+  INDEX `fk_incindent_organization1` (`id_organization_coordinator` ASC) ,
+  INDEX `fk_incident_police_statement1` (`id_police_statement` ASC) ,
+  CONSTRAINT `fk_incindent_map_link`
+    FOREIGN KEY (`id_map_link` )
+    REFERENCES `poiskdetei`.`map_link` (`id_map_link` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incindent_incident_state`
+    FOREIGN KEY (`id_incident_state` )
+    REFERENCES `poiskdetei`.`incident_state` (`id_incident_state` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incindent_person1`
+    FOREIGN KEY (`id_person_coordinator` )
+    REFERENCES `poiskdetei`.`person` (`id_person` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incindent_person2`
+    FOREIGN KEY (`id_person_missing` )
+    REFERENCES `poiskdetei`.`person` (`id_person` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incindent_person3`
+    FOREIGN KEY (`id_person_registrator` )
+    REFERENCES `poiskdetei`.`person` (`id_person` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incindent_organization1`
+    FOREIGN KEY (`id_organization_coordinator` )
+    REFERENCES `poiskdetei`.`organization` (`id_organization` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incident_police_statement1`
+    FOREIGN KEY (`id_police_statement` )
+    REFERENCES `poiskdetei`.`police_statement` (`id_police_statement` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`incident_to_file_link`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`incident_to_file_link` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`incident_to_file_link` (
+  `id_incident_to_file` INT NOT NULL ,
+  `id_incindent` INT NOT NULL ,
+  `id_file_link` INT NOT NULL ,
+  PRIMARY KEY (`id_incident_to_file`) ,
+  INDEX `fk_incident_to_file_incindent1` (`id_incindent` ASC) ,
+  INDEX `fk_incident_to_file_link_file_link1` (`id_file_link` ASC) ,
+  CONSTRAINT `fk_incident_to_file_incindent1`
+    FOREIGN KEY (`id_incindent` )
+    REFERENCES `poiskdetei`.`incident` (`id_incident` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incident_to_file_link_file_link1`
+    FOREIGN KEY (`id_file_link` )
+    REFERENCES `poiskdetei`.`file_link` (`id_file_link` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
