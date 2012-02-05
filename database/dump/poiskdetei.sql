@@ -2,13 +2,10 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-DROP SCHEMA IF EXISTS `mydb` ;
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-SHOW WARNINGS;
 DROP SCHEMA IF EXISTS `poiskdetei` ;
-CREATE SCHEMA IF NOT EXISTS `poiskdetei` ;
+CREATE SCHEMA IF NOT EXISTS `poiskdetei` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 SHOW WARNINGS;
-USE `mydb` ;
+USE `poiskdetei` ;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`person`
@@ -28,12 +25,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`person_to_relatives`
+-- Table `poiskdetei`.`person_to_relatives`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`person_to_relatives` ;
+DROP TABLE IF EXISTS `poiskdetei`.`person_to_relatives` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `mydb`.`person_to_relatives` (
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person_to_relatives` (
   `id_person_to_relative` INT NOT NULL ,
   `id_person` INT NOT NULL ,
   `id_relative` INT NOT NULL ,
@@ -53,7 +50,6 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`person_to_relatives` (
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-USE `poiskdetei` ;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`country`
