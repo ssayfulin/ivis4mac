@@ -22,6 +22,13 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person` (
   PRIMARY KEY (`id_person`) )
 ENGINE = InnoDB;
 
+INSERT INTO `person` VALUES(1, 'Тишкина', 'Ирина', NULL, NULL);
+INSERT INTO `person` VALUES(2, 'Костюнин', 'Павлик', NULL, NULL);
+INSERT INTO `person` VALUES(3, 'Четина', 'Катерина', NULL, NULL);
+INSERT INTO `person` VALUES(4, 'Анисимова ', 'Катерина', NULL, NULL);
+INSERT INTO `person` VALUES(5, 'Беспрозванная', 'Ольга', NULL, NULL);
+INSERT INTO `person` VALUES(6, 'Королев ', 'Максим', NULL, NULL);
+
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
