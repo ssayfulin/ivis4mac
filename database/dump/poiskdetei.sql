@@ -393,6 +393,26 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`sign` (
   PRIMARY KEY (`id_sign`) )
 ENGINE = InnoDB;
 
+INSERT INTO `sign` VALUES(1, 'возраст');
+INSERT INTO `sign` VALUES(2, 'рост');
+INSERT INTO `sign` VALUES(3, 'вес');
+INSERT INTO `sign` VALUES(4, 'телосложение');
+INSERT INTO `sign` VALUES(5, 'цвет глаз');
+INSERT INTO `sign` VALUES(6, 'форма глаз');
+INSERT INTO `sign` VALUES(7, 'размер глаз');
+INSERT INTO `sign` VALUES(8, 'форма бровей');
+INSERT INTO `sign` VALUES(9, 'тип бровей');
+INSERT INTO `sign` VALUES(10, 'тип лица');
+INSERT INTO `sign` VALUES(11, 'форма лица');
+INSERT INTO `sign` VALUES(12, 'цвет волос');
+INSERT INTO `sign` VALUES(13, 'тип волос');
+INSERT INTO `sign` VALUES(14, 'длинна волос');
+INSERT INTO `sign` VALUES(15, 'цвет усов');
+INSERT INTO `sign` VALUES(16, 'форма усов');
+INSERT INTO `sign` VALUES(17, 'ушные раковины');
+INSERT INTO `sign` VALUES(18, 'цвет кожи');
+INSERT INTO `sign` VALUES(19, 'особые приметы');
+
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
