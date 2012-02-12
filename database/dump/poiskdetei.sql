@@ -3,7 +3,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 DROP SCHEMA IF EXISTS `poiskdetei` ;
-CREATE SCHEMA IF NOT EXISTS `poiskdetei` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE SCHEMA IF NOT EXISTS `poiskdetei` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 SHOW WARNINGS;
 USE `poiskdetei` ;
 
@@ -22,8 +22,6 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person` (
   PRIMARY KEY (`id_person`) )
 ENGINE = InnoDB;
 
-
-SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`person_to_relatives`
@@ -458,6 +456,7 @@ ENGINE = InnoDB;
 
 SHOW WARNINGS;
 
+
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`organization`
 -- -----------------------------------------------------
@@ -494,10 +493,36 @@ DROP TABLE IF EXISTS `poiskdetei`.`police_statement` ;
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`police_statement` (
   `id_police_statement` INT NOT NULL ,
-  PRIMARY KEY (`id_police_statement`) )
+  `id_police_department` INT NOT NULL ,
+  `id_investigating_officer` INT NOT NULL ,
+  `id_police_statement_state` INT NOT NULL ,
+  `registered_at` DATETIME NULL DEFAULT NULL ,
+  `history` VARCHAR(45) NULL DEFAULT NULL ,
+  `police_statement_number` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_police_statement`) ,
+  INDEX `fk_police_statement_organization1` (`id_police_department` ASC) ,
+  INDEX `fk_police_statement_person1` (`id_investigating_officer` ASC) ,
+  INDEX `fk_police_statement_police_statement_state1` (`id_police_statement_state` ASC) ,
+  CONSTRAINT `fk_police_statement_organization1`
+    FOREIGN KEY (`id_police_department` )
+    REFERENCES `poiskdetei`.`organization` (`id_organization` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_police_statement_person1`
+    FOREIGN KEY (`id_investigating_officer` )
+    REFERENCES `poiskdetei`.`person` (`id_person` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_police_statement_police_statement_state1`
+    FOREIGN KEY (`id_police_statement_state` )
+    REFERENCES `poiskdetei`.`police_statement_state` (`id_police_statement_state` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
+
+
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`organization_to_contact`
@@ -526,6 +551,51 @@ ENGINE = InnoDB;
 
 SHOW WARNINGS;
 
+
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`police_statement_to_person`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`police_statement_to_person` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`police_statement_to_person` (
+  `id_police_statement_to_person` INT NOT NULL ,
+  `id_police_statement` INT NOT NULL ,
+  `id_person` INT NOT NULL ,
+  `comment` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_police_statement_to_person`) ,
+  INDEX `fk_police_statement_to_person_person` (`id_person` ASC) ,
+  INDEX `fk_police_statement_to_person_police_statement1` (`id_police_statement` ASC) ,
+  CONSTRAINT `fk_police_statement_to_person_person`
+    FOREIGN KEY (`id_person` )
+    REFERENCES `poiskdetei`.`person` (`id_person` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_police_statement_to_person_police_statement1`
+    FOREIGN KEY (`id_police_statement` )
+    REFERENCES `poiskdetei`.`police_statement` (`id_police_statement` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`web_link`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`web_link` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`web_link` (
+  `id_web_link` INT NOT NULL ,
+  `description` VARCHAR(45) NULL DEFAULT NULL ,
+  `value` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_web_link`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`map_link`
 -- -----------------------------------------------------
@@ -538,21 +608,6 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`map_link` (
   `longitude` FLOAT NULL DEFAULT NULL ,
   `latitude` FLOAT NULL DEFAULT NULL ,
   PRIMARY KEY (`id_map_link`) )
-ENGINE = InnoDB;
-
-SHOW WARNINGS;
-
--- -----------------------------------------------------
--- Table `poiskdetei`.`file_link`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `poiskdetei`.`file_link` ;
-
-SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `poiskdetei`.`file_link` (
-  `id_file_link` INT NOT NULL ,
-  `name` VARCHAR(45) NOT NULL ,
-  `link_value` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id_file_link`) )
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
@@ -588,7 +643,8 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`incident` (
   `id_police_statement` INT NOT NULL ,
   `date` DATETIME NOT NULL ,
   `incident_registration_date` DATETIME NULL DEFAULT NULL ,
-  `description` VARCHAR(45) NULL DEFAULT NULL ,
+  `incident_description` VARCHAR(45) NULL DEFAULT NULL ,
+  `incident_extra_information` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id_incident`) ,
   UNIQUE INDEX `id_idincindent_UNIQUE` (`id_incident` ASC) ,
   INDEX `fk_incindent_map_link` (`id_map_link` ASC) ,
@@ -638,12 +694,74 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `poiskdetei`.`incident_to_file_link`
+-- Table `poiskdetei`.`incident_to_web_link`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `poiskdetei`.`incident_to_file_link` ;
+DROP TABLE IF EXISTS `poiskdetei`.`incident_to_web_link` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `poiskdetei`.`incident_to_file_link` (
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`incident_to_web_link` (
+  `id_incident_to_web_link` INT NOT NULL ,
+  `incident_id_incident` INT NOT NULL ,
+  `web_link_id_web_link` INT NOT NULL ,
+  PRIMARY KEY (`id_incident_to_web_link`) ,
+  INDEX `fk_incident_to_web_link_incident1` (`incident_id_incident` ASC) ,
+  INDEX `fk_incident_to_web_link_web_link1` (`web_link_id_web_link` ASC) ,
+  CONSTRAINT `fk_incident_to_web_link_incident1`
+    FOREIGN KEY (`incident_id_incident` )
+    REFERENCES `poiskdetei`.`incident` (`id_incident` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incident_to_web_link_web_link1`
+    FOREIGN KEY (`web_link_id_web_link` )
+    REFERENCES `poiskdetei`.`web_link` (`id_web_link` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+
+
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`police_statement_state`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`police_statement_state` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`police_statement_state` (
+  `id_police_statement_state` INT NOT NULL ,
+  `value` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_police_statement_state`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`file`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`file` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`file` (
+  `id_file` INT NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
+  `description` VARCHAR(45) NOT NULL ,
+  `data` BLOB NOT NULL ,
+  PRIMARY KEY (`id_file`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`incident_to_file`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`incident_to_file` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`incident_to_file` (
   `id_incident_to_file` INT NOT NULL ,
   `id_incindent` INT NOT NULL ,
   `id_file_link` INT NOT NULL ,
@@ -657,7 +775,7 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`incident_to_file_link` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_incident_to_file_link_file_link1`
     FOREIGN KEY (`id_file_link` )
-    REFERENCES `poiskdetei`.`file_link` (`id_file_link` )
+    REFERENCES `poiskdetei`.`file` (`id_file` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -668,7 +786,6 @@ SHOW WARNINGS;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
 
 INSERT INTO `sign_detail` VALUES(1, 'на вид 7 лет');
 INSERT INTO `sign_detail` VALUES(2, 'на вид 11-12 лет');
