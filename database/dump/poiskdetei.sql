@@ -22,12 +22,6 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person` (
   PRIMARY KEY (`id_person`) )
 ENGINE = InnoDB;
 
-INSERT INTO `person` VALUES(1, 'Тишкина', 'Ирина', NULL, NULL);
-INSERT INTO `person` VALUES(2, 'Костюнин', 'Павлик', NULL, NULL);
-INSERT INTO `person` VALUES(3, 'Четина', 'Катерина', NULL, NULL);
-INSERT INTO `person` VALUES(4, 'Анисимова ', 'Катерина', NULL, NULL);
-INSERT INTO `person` VALUES(5, 'Беспрозванная', 'Ольга', NULL, NULL);
-INSERT INTO `person` VALUES(6, 'Королев ', 'Максим', NULL, NULL);
 
 SHOW WARNINGS;
 
@@ -400,26 +394,6 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`sign` (
   PRIMARY KEY (`id_sign`) )
 ENGINE = InnoDB;
 
-INSERT INTO `sign` VALUES(1, 'возраст');
-INSERT INTO `sign` VALUES(2, 'рост');
-INSERT INTO `sign` VALUES(3, 'вес');
-INSERT INTO `sign` VALUES(4, 'телосложение');
-INSERT INTO `sign` VALUES(5, 'цвет глаз');
-INSERT INTO `sign` VALUES(6, 'форма глаз');
-INSERT INTO `sign` VALUES(7, 'размер глаз');
-INSERT INTO `sign` VALUES(8, 'форма бровей');
-INSERT INTO `sign` VALUES(9, 'тип бровей');
-INSERT INTO `sign` VALUES(10, 'тип лица');
-INSERT INTO `sign` VALUES(11, 'форма лица');
-INSERT INTO `sign` VALUES(12, 'цвет волос');
-INSERT INTO `sign` VALUES(13, 'тип волос');
-INSERT INTO `sign` VALUES(14, 'длинна волос');
-INSERT INTO `sign` VALUES(15, 'цвет усов');
-INSERT INTO `sign` VALUES(16, 'форма усов');
-INSERT INTO `sign` VALUES(17, 'ушные раковины');
-INSERT INTO `sign` VALUES(18, 'цвет кожи');
-INSERT INTO `sign` VALUES(19, 'особые приметы');
-
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
@@ -433,46 +407,6 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`sign_detail` (
   `description` TEXT NULL DEFAULT NULL COMMENT '(rost)высокий, (telo)крепкого телосложения,( волосы) и (усы) седые' ,
   PRIMARY KEY (`id_sign_detail`) )
 ENGINE = InnoDB;
-
-
-INSERT INTO `sign_detail` VALUES(1, 'на вид 7 лет');
-INSERT INTO `sign_detail` VALUES(2, 'на вид 11-12 лет');
-INSERT INTO `sign_detail` VALUES(3, 'на вид 4 года');
-
-INSERT INTO `sign_detail` VALUES(4, '90-95 cm');
-INSERT INTO `sign_detail` VALUES(5, '148 cm');
-INSERT INTO `sign_detail` VALUES(6, '140 cm');
-INSERT INTO `sign_detail` VALUES(7, '117-120 cm');
-INSERT INTO `sign_detail` VALUES(8, '160 cm');
-INSERT INTO `sign_detail` VALUES(9, '125 cm');
-
-INSERT INTO `sign_detail` VALUES(10, 'среднего');
-INSERT INTO `sign_detail` VALUES(11, 'худощавого');
-
-INSERT INTO `sign_detail` VALUES(12, 'овальное');
-INSERT INTO `sign_detail` VALUES(13, 'в веснушках');
-
-INSERT INTO `sign_detail` VALUES(14, 'короткие');
-INSERT INTO `sign_detail` VALUES(15, 'светло-русые');
-INSERT INTO `sign_detail` VALUES(16, 'русые');
-INSERT INTO `sign_detail` VALUES(17, 'длинные');
-INSERT INTO `sign_detail` VALUES(18, 'светлые');
-INSERT INTO `sign_detail` VALUES(19, 'ниже плеч');
-INSERT INTO `sign_detail` VALUES(20, 'волнистые');
-INSERT INTO `sign_detail` VALUES(21, 'прямые');
-INSERT INTO `sign_detail` VALUES(22, 'голубые');
-INSERT INTO `sign_detail` VALUES(23, 'серо-зелёные');
-
-INSERT INTO `sign_detail` VALUES(24, 'большие');
-INSERT INTO `sign_detail` VALUES(25, 'с проколом');
-
-INSERT INTO `sign_detail` VALUES(26, 'густые');
-INSERT INTO `sign_detail` VALUES(27, 'дугообразные');
-
-INSERT INTO `sign_detail` VALUES(28, 'на лбу шрам длинной 2 см');
-INSERT INTO `sign_detail` VALUES(29, 'на правой руке на нижней фаланге указательного пальца с внешней стороны ожог от утюга, внизу живота у левой ноги родинка 0,5 см круглой формы, на животе след от оспы в виде выпуклого белого пятна');
-INSERT INTO `sign_detail` VALUES(30, 'шрам на лбу');
-INSERT INTO `sign_detail` VALUES(31, 'отсутствуют два верхних и два нижних зуба, царапина на правой щеке');
 
 SHOW WARNINGS;
 
@@ -734,3 +668,80 @@ SHOW WARNINGS;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO `sign_detail` VALUES(1, 'на вид 7 лет');
+INSERT INTO `sign_detail` VALUES(2, 'на вид 11-12 лет');
+INSERT INTO `sign_detail` VALUES(3, 'на вид 4 года');
+
+INSERT INTO `sign_detail` VALUES(4, '90-95 cm');
+INSERT INTO `sign_detail` VALUES(5, '148 cm');
+INSERT INTO `sign_detail` VALUES(6, '140 cm');
+INSERT INTO `sign_detail` VALUES(7, '117-120 cm');
+INSERT INTO `sign_detail` VALUES(8, '160 cm');
+INSERT INTO `sign_detail` VALUES(9, '125 cm');
+
+INSERT INTO `sign_detail` VALUES(10, 'среднего');
+INSERT INTO `sign_detail` VALUES(11, 'худощавого');
+
+INSERT INTO `sign_detail` VALUES(12, 'овальное');
+INSERT INTO `sign_detail` VALUES(13, 'в веснушках');
+
+INSERT INTO `sign_detail` VALUES(14, 'короткие');
+INSERT INTO `sign_detail` VALUES(15, 'светло-русые');
+INSERT INTO `sign_detail` VALUES(16, 'русые');
+INSERT INTO `sign_detail` VALUES(17, 'длинные');
+INSERT INTO `sign_detail` VALUES(18, 'светлые');
+INSERT INTO `sign_detail` VALUES(19, 'ниже плеч');
+INSERT INTO `sign_detail` VALUES(20, 'волнистые');
+INSERT INTO `sign_detail` VALUES(21, 'прямые');
+INSERT INTO `sign_detail` VALUES(22, 'голубые');
+INSERT INTO `sign_detail` VALUES(23, 'серо-зелёные');
+
+INSERT INTO `sign_detail` VALUES(24, 'большие');
+INSERT INTO `sign_detail` VALUES(25, 'с проколом');
+
+INSERT INTO `sign_detail` VALUES(26, 'густые');
+INSERT INTO `sign_detail` VALUES(27, 'дугообразные');
+
+INSERT INTO `sign_detail` VALUES(28, 'на лбу шрам длинной 2 см');
+INSERT INTO `sign_detail` VALUES(29, 'на правой руке на нижней фаланге указательного пальца с внешней стороны ожог от утюга, внизу живота у левой ноги родинка 0,5 см круглой формы, на животе след от оспы в виде выпуклого белого пятна');
+INSERT INTO `sign_detail` VALUES(30, 'шрам на лбу');
+INSERT INTO `sign_detail` VALUES(31, 'отсутствуют два верхних и два нижних зуба, царапина на правой щеке');
+
+
+
+
+
+
+
+
+
+INSERT INTO `sign` VALUES(1, 'возраст');
+INSERT INTO `sign` VALUES(2, 'рост');
+INSERT INTO `sign` VALUES(3, 'вес');
+INSERT INTO `sign` VALUES(4, 'телосложение');
+INSERT INTO `sign` VALUES(5, 'цвет глаз');
+INSERT INTO `sign` VALUES(6, 'форма глаз');
+INSERT INTO `sign` VALUES(7, 'размер глаз');
+INSERT INTO `sign` VALUES(8, 'форма бровей');
+INSERT INTO `sign` VALUES(9, 'тип бровей');
+INSERT INTO `sign` VALUES(10, 'тип лица');
+INSERT INTO `sign` VALUES(11, 'форма лица');
+INSERT INTO `sign` VALUES(12, 'цвет волос');
+INSERT INTO `sign` VALUES(13, 'тип волос');
+INSERT INTO `sign` VALUES(14, 'длинна волос');
+INSERT INTO `sign` VALUES(15, 'цвет усов');
+INSERT INTO `sign` VALUES(16, 'форма усов');
+INSERT INTO `sign` VALUES(17, 'ушные раковины');
+INSERT INTO `sign` VALUES(18, 'цвет кожи');
+INSERT INTO `sign` VALUES(19, 'особые приметы');
+
+
+
+INSERT INTO `person` VALUES(1, 'Тишкина', 'Ирина', NULL, NULL);
+INSERT INTO `person` VALUES(2, 'Костюнин', 'Павлик', NULL, NULL);
+INSERT INTO `person` VALUES(3, 'Четина', 'Катерина', NULL, NULL);
+INSERT INTO `person` VALUES(4, 'Анисимова ', 'Катерина', NULL, NULL);
+INSERT INTO `person` VALUES(5, 'Беспрозванная', 'Ольга', NULL, NULL);
+INSERT INTO `person` VALUES(6, 'Королев ', 'Максим', NULL, NULL);

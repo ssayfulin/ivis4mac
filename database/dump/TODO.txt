@@ -1,0 +1,11 @@
+Renames
+- Description -> Value
+sign_detail -> sign type
+
+Tables 
+
+    - Person Relatives
+    - Clothes
+
+
+

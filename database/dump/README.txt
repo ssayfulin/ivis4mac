@@ -11,6 +11,12 @@
 4. There should be pile of tables  
 
    Select Arrange/AutoLayout menu item to have more nice view.
+    
+   I suggest using poiskdetei_diagram_arange.py script to arrange tables on diagram
+   Scripting/Open Script
+
+
+
    Change Model/Diagram Properties and Size if required
 
 5. Do modifications if necessary in MySQL Workbench
