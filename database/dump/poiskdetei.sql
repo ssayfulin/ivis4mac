@@ -402,8 +402,13 @@ DROP TABLE IF EXISTS `poiskdetei`.`sign_detail` ;
 SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`sign_detail` (
   `id_sign_detail` INT NOT NULL AUTO_INCREMENT ,
+  `id_sign` INT NOT NULL ,
   `description` TEXT NULL DEFAULT NULL COMMENT '(rost)высокий, (telo)крепкого телосложения,( волосы) и (усы) седые' ,
-  PRIMARY KEY (`id_sign_detail`) )
+  PRIMARY KEY (`id_sign_detail`),
+  FOREIGN KEY (`id_sign` )
+    REFERENCES `poiskdetei`.`sign` (`id_sign` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
@@ -787,44 +792,46 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-INSERT INTO `sign_detail` VALUES(1, 'на вид 7 лет');
-INSERT INTO `sign_detail` VALUES(2, 'на вид 11-12 лет');
-INSERT INTO `sign_detail` VALUES(3, 'на вид 4 года');
+INSERT INTO `sign_detail` VALUES(1, 1, 'на вид 7 лет');
+INSERT INTO `sign_detail` VALUES(2, 1, 'на вид 11-12 лет');
+INSERT INTO `sign_detail` VALUES(3, 1, 'на вид 4 года');
 
-INSERT INTO `sign_detail` VALUES(4, '90-95 cm');
-INSERT INTO `sign_detail` VALUES(5, '148 cm');
-INSERT INTO `sign_detail` VALUES(6, '140 cm');
-INSERT INTO `sign_detail` VALUES(7, '117-120 cm');
-INSERT INTO `sign_detail` VALUES(8, '160 cm');
-INSERT INTO `sign_detail` VALUES(9, '125 cm');
+INSERT INTO `sign_detail` VALUES(4, 2, '90-95 cm');
+INSERT INTO `sign_detail` VALUES(5, 2, '148 cm');
+INSERT INTO `sign_detail` VALUES(6, 2, '140 cm');
+INSERT INTO `sign_detail` VALUES(7, 2, '117-120 cm');
+INSERT INTO `sign_detail` VALUES(8, 2, '160 cm');
+INSERT INTO `sign_detail` VALUES(9, 2, '125 cm');
 
-INSERT INTO `sign_detail` VALUES(10, 'среднего');
-INSERT INTO `sign_detail` VALUES(11, 'худощавого');
+INSERT INTO `sign_detail` VALUES(10, 4, 'среднего');
+INSERT INTO `sign_detail` VALUES(11, 4, 'худощавого');
 
-INSERT INTO `sign_detail` VALUES(12, 'овальное');
-INSERT INTO `sign_detail` VALUES(13, 'в веснушках');
+INSERT INTO `sign_detail` VALUES(12, 11, 'овальное');
+INSERT INTO `sign_detail` VALUES(13, 10, 'в веснушках');
 
-INSERT INTO `sign_detail` VALUES(14, 'короткие');
-INSERT INTO `sign_detail` VALUES(15, 'светло-русые');
-INSERT INTO `sign_detail` VALUES(16, 'русые');
-INSERT INTO `sign_detail` VALUES(17, 'длинные');
-INSERT INTO `sign_detail` VALUES(18, 'светлые');
-INSERT INTO `sign_detail` VALUES(19, 'ниже плеч');
-INSERT INTO `sign_detail` VALUES(20, 'волнистые');
-INSERT INTO `sign_detail` VALUES(21, 'прямые');
-INSERT INTO `sign_detail` VALUES(22, 'голубые');
-INSERT INTO `sign_detail` VALUES(23, 'серо-зелёные');
+INSERT INTO `sign_detail` VALUES(14, 14, 'короткие');
+INSERT INTO `sign_detail` VALUES(15, 12, 'светло-русые');
+INSERT INTO `sign_detail` VALUES(16, 12, 'русые');
+INSERT INTO `sign_detail` VALUES(17, 14, 'длинные');
+INSERT INTO `sign_detail` VALUES(18, 12, 'светлые');
+INSERT INTO `sign_detail` VALUES(19, 14, 'ниже плеч');
 
-INSERT INTO `sign_detail` VALUES(24, 'большие');
-INSERT INTO `sign_detail` VALUES(25, 'с проколом');
+INSERT INTO `sign_detail` VALUES(20, 13, 'волнистые');
+INSERT INTO `sign_detail` VALUES(21, 13, 'прямые');
 
-INSERT INTO `sign_detail` VALUES(26, 'густые');
-INSERT INTO `sign_detail` VALUES(27, 'дугообразные');
+INSERT INTO `sign_detail` VALUES(22,  5, 'голубые');
+INSERT INTO `sign_detail` VALUES(23,  5, 'серо-зелёные');
 
-INSERT INTO `sign_detail` VALUES(28, 'на лбу шрам длинной 2 см');
-INSERT INTO `sign_detail` VALUES(29, 'на правой руке на нижней фаланге указательного пальца с внешней стороны ожог от утюга, внизу живота у левой ноги родинка 0,5 см круглой формы, на животе след от оспы в виде выпуклого белого пятна');
-INSERT INTO `sign_detail` VALUES(30, 'шрам на лбу');
-INSERT INTO `sign_detail` VALUES(31, 'отсутствуют два верхних и два нижних зуба, царапина на правой щеке');
+INSERT INTO `sign_detail` VALUES(24, 17, 'большие');
+INSERT INTO `sign_detail` VALUES(25, 17, 'с проколом');
+
+INSERT INTO `sign_detail` VALUES(26, 9, 'густые');
+INSERT INTO `sign_detail` VALUES(27, 8, 'дугообразные');
+
+INSERT INTO `sign_detail` VALUES(28, 19, 'на лбу шрам длинной 2 см');
+INSERT INTO `sign_detail` VALUES(29, 19, 'на правой руке на нижней фаланге указательного пальца с внешней стороны ожог от утюга, внизу живота у левой ноги родинка 0,5 см круглой формы, на животе след от оспы в виде выпуклого белого пятна');
+INSERT INTO `sign_detail` VALUES(30, 19, 'шрам на лбу');
+INSERT INTO `sign_detail` VALUES(31, 19, 'отсутствуют два верхних и два нижних зуба, царапина на правой щеке');
 
 
 
