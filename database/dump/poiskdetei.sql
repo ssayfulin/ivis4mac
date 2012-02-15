@@ -787,11 +787,6 @@ ENGINE = InnoDB;
 
 SHOW WARNINGS;
 
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
 INSERT INTO `sign_detail` VALUES(1, 1, 'на вид 7 лет');
 INSERT INTO `sign_detail` VALUES(2, 1, 'на вид 11-12 лет');
 INSERT INTO `sign_detail` VALUES(3, 1, 'на вид 4 года');
@@ -869,3 +864,9 @@ INSERT INTO `person` VALUES(3, 'Четина', 'Катерина', NULL, NULL);
 INSERT INTO `person` VALUES(4, 'Анисимова ', 'Катерина', NULL, NULL);
 INSERT INTO `person` VALUES(5, 'Беспрозванная', 'Ольга', NULL, NULL);
 INSERT INTO `person` VALUES(6, 'Королев ', 'Максим', NULL, NULL);
+
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
