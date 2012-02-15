@@ -172,6 +172,33 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
+-- Table `poiskdetei`.`person_to_address`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`person_to_address` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person_to_address` (
+  `id_person_address` INT NOT NULL AUTO_INCREMENT ,
+  `id_person` INT NOT NULL ,
+  `id_address` INT NOT NULL ,
+  PRIMARY KEY (`id_person_address`) ,
+  INDEX `fk_id_person` (`id_person` ASC) ,
+  INDEX `fk_id_address` (`id_address` ASC) ,
+  CONSTRAINT `fk_id_person`
+    FOREIGN KEY (`id_person` )
+    REFERENCES `poiskdetei`.`person` (`id_person` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_id_address`
+    FOREIGN KEY (`id_address` )
+    REFERENCES `poiskdetei`.`address` (`id_address` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
 -- Table `poiskdetei`.`competance_type`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `poiskdetei`.`competance_type` ;
