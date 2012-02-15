@@ -397,11 +397,6 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`contact` (
     FOREIGN KEY (`id_contact_type` )
     REFERENCES `poiskdetei`.`contact_type` (`id_contact_type` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_{B1CD095A-881E-42D6-B842-442EF4FC6E0D}`
-    FOREIGN KEY (`id_person` )
-    REFERENCES `poiskdetei`.`person` (`id_person` )
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -808,6 +803,33 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`incident_to_file` (
   CONSTRAINT `fk_incident_to_file_link_file_link1`
     FOREIGN KEY (`id_file_link` )
     REFERENCES `poiskdetei`.`file` (`id_file` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `poiskdetei`.`person_to_contact`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `poiskdetei`.`person_to_contact` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person_to_contact` (
+  `id_person_contact` INT NOT NULL AUTO_INCREMENT ,
+  `id_person` INT NOT NULL ,
+  `id_contact` INT NOT NULL ,
+  PRIMARY KEY (`id_person_contact`) ,
+  INDEX `fk_id_contact` (`id_contact` ASC) ,
+  INDEX `fk_id_person` (`id_person` ASC) ,
+  CONSTRAINT `fk_id_contact`
+    FOREIGN KEY (`id_contact` )
+    REFERENCES `poiskdetei`.`contact` (`id_contact` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_id_person`
+    FOREIGN KEY (`id_person` )
+    REFERENCES `poiskdetei`.`person` (`id_person` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
