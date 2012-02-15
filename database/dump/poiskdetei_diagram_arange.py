@@ -87,3 +87,5 @@ set_figure(figures, "police_statement_to_person", 2530,1513)
 set_figure(figures, "web_link", 1774,2095)
 
 set_figure(figures, "incident_to_web_link", 1569,1975)
+
+set_figure(figures, "person_to_address", 1209, 480)
