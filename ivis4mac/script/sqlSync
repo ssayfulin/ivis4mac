@@ -1,0 +1,32 @@
+
+
+def exec(cmd)
+
+  p = IO.popen(cmd)
+  output = ""
+  while (line = p.gets)
+    puts line
+    output = output + line;
+  end
+  return output
+end
+
+
+
+dumpDir = "../../database/dump"
+
+sql =  File.read("#{dumpDir}/poiskdetei.sql").gsub(/poiskdetei/, "ivis4mac")
+
+f = File.new("#{dumpDir}/ivis4mac.sql", "w")
+f.write(sql)
+f.close
+
+
+
+exec "mysql -u root --password=root < #{f.path}"
+
+
+
+
+
+
