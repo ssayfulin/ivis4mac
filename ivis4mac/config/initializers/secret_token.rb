@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Ivis4mac::Application.config.secret_token = 'ad58709bd214abf24ad295fbc1cfda8e22b7cea083180d986a07989a3c27b06c8ebff3096ee0fb9f8f811e6d0df87ada7ecc2461c4b7330eea93cdf114c97f4e'
+Ivis4mac::Application.config.secret_token = '62ac979ff463e83e5eb4d6c6b12f5e382293dc1256eb94fb77c65f3cac0ea2a41414901ea6f8a424823877712217c848f116a29efe4560da0d32f511afe8903a'

@@ -1,0 +1,2 @@
+sass-rails ~> 3.2.3
+coffee-rails ~> 3.2.1

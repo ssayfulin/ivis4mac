@@ -1,6 +1,15 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+# Comment out the frameworks you don't want (if you don't want ActionMailer,
+# make sure to comment out the `config.action_mailer` lines in your
+# config/environments/development.rb and config/environments/test.rb files):
+require 'action_controller/railtie'
+require 'dm-rails/railtie'
+require 'sprockets/railtie'
+require 'action_mailer/railtie'
+require 'active_resource/railtie'
+require 'rails/test_unit/railtie'
+
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
