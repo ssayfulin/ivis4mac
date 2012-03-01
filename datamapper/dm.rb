@@ -6,32 +6,68 @@ class Person
 
   include DataMapper::Resource
   property :id, Serial
-  property :first_name,	String
-  property :last_name,  String
+  property :first_name,	String, :required => true
+  property :last_name,  String, :required => true
+
   property :second_name, String
   property :patronymic_name, String
   property :birth_date, Date
 
   has n, :person_signs
-  has n, :signs, :through => :person_signs
+  has n, :sign_values, :through => :person_signs
+  has n, :sign_types, :through => :person_signs
+
+
+end
+
+class SignValue
+  include DataMapper::Resource
+  property :id, Serial
+
+  property :sign_value, String
+  has n, :person_signs
+  has n, :persons, :through => :person_signs
 end
 
 
-class Sign
+class SignType
   include DataMapper::Resource
 
   property :id, Serial
+  property :sign_type, String
+
 
   has n, :person_signs
   has n, :persons, :through => :person_signs
 end
 
 
+
+
 class PersonSign
   include DataMapper::Resource
+
   belongs_to :person,   :key => true
-  belongs_to :sign, :key => true
+  belongs_to :sign_value, :key => true
+  belongs_to :sign_type, :key => true
 end
+
+
+class Image
+  include DataMapper::Resource
+  property :id,     Serial
+  property :path,   FilePath, :required => true
+  property :md5sum, String,   :length => 32, :default => lambda { |r, p| Digest::MD5.hexdigest(r.path.read) if r.path }
+
+end
+
+class File
+
+
+
+end
+
+
 
 
 
