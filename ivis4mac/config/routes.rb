@@ -1,7 +1,7 @@
 Ivis4mac::Application.routes.draw do
-  resources :fifas
-
   resources :people
+
+  resources :fifas
 
   get "home/index"
 

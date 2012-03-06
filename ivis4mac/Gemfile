@@ -70,6 +70,13 @@ gem 'test-unit'
 gem 'i18n'
 
 
+group :test, :development do
+  gem "rspec-rails", "~> 2.6"
+end
+
+
+gem "webrat"
+gem "capybara"
 
 
 
