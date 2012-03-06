@@ -1,4 +1,13 @@
 Ivis4mac::Application.routes.draw do
+  resources :fifas
+
+  resources :people
+
+  get "home/index"
+
+
+  root :to => "home#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

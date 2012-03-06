@@ -9,11 +9,33 @@ Application	config/application.rb	/^  class Application < Rails::Application$/;"
 ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
 ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
 BrowsingTest	test/performance/browsing_test.rb	/^class BrowsingTest < ActionDispatch::PerformanceTest$/;"	c
+File	app/models/person.rb	/^class File$/;"	c
+HomeController	app/controllers/home_controller.rb	/^class HomeController < ApplicationController$/;"	c
+HomeControllerTest	test/functional/home_controller_test.rb	/^class HomeControllerTest < ActionController::TestCase$/;"	c
+HomeHelper	app/helpers/home_helper.rb	/^module HomeHelper$/;"	m
+HomeHelperTest	test/unit/helpers/home_helper_test.rb	/^class HomeHelperTest < ActionView::TestCase$/;"	c
+Image	app/models/person.rb	/^class Image$/;"	c
 Ivis4mac	config/application.rb	/^module Ivis4mac$/;"	m
+PeopleController	app/controllers/people_controller.rb	/^class PeopleController < ApplicationController$/;"	c
+PeopleControllerTest	test/functional/people_controller_test.rb	/^class PeopleControllerTest < ActionController::TestCase$/;"	c
+PeopleHelper	app/helpers/people_helper.rb	/^module PeopleHelper$/;"	m
+PeopleHelperTest	test/unit/helpers/people_helper_test.rb	/^class PeopleHelperTest < ActionView::TestCase$/;"	c
 Person	app/models/person.rb	/^class Person$/;"	c
+PersonImage	app/models/person.rb	/^class PersonImage$/;"	c
+PersonSign	app/models/person.rb	/^class PersonSign$/;"	c
 PersonTest	test/unit/person_test.rb	/^class PersonTest < ActiveSupport::TestCase$/;"	c
 Rack	config/initializers/jruby_monkey_patch.rb	/^  class Rack::Mount::Strexp$/;"	c
-about	public/index.html	/^      function about() {$/;"	f
+SignType	app/models/person.rb	/^class SignType$/;"	c
+SignValue	app/models/person.rb	/^class SignValue$/;"	c
 compile	config/initializers/jruby_monkey_patch.rb	/^      def compile(str, requirements, separators, anchor)$/;"	f	class:Rack
+create	app/controllers/people_controller.rb	/^  def create$/;"	f	class:PeopleController
+dbImport	script/sqlSync.rb	/^def dbImport(db)$/;"	f
+destroy	app/controllers/people_controller.rb	/^  def destroy$/;"	f	class:PeopleController
+edit	app/controllers/people_controller.rb	/^  def edit$/;"	f	class:PeopleController
 exec	script/sqlSync.rb	/^def exec(cmd)$/;"	f
+index	app/controllers/home_controller.rb	/^  def index$/;"	f	class:HomeController
+index	app/controllers/people_controller.rb	/^  def index$/;"	f	class:PeopleController
+new	app/controllers/people_controller.rb	/^  def new$/;"	f	class:PeopleController
+show	app/controllers/people_controller.rb	/^  def show$/;"	f	class:PeopleController
 test_homepage	test/performance/browsing_test.rb	/^  def test_homepage$/;"	f	class:BrowsingTest
+update	app/controllers/people_controller.rb	/^  def update$/;"	f	class:PeopleController
