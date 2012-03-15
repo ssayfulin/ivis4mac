@@ -1,0 +1,23 @@
+<h1>Listing sign_values</h1>
+
+<table>
+  <tr>
+    <th>Sign value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sign_values.each do |sign_value| %>
+  <tr>
+    <td><%= sign_value.sign_value %></td>
+    <td><%= link_to 'Show', sign_value %></td>
+    <td><%= link_to 'Edit', edit_sign_value_path(sign_value) %></td>
+    <td><%= link_to 'Destroy', sign_value, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sign value', new_sign_value_path %>
