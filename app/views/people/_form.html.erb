@@ -16,6 +16,10 @@
     <%= f.text_field :first_name %>
   </div>
   <div class="field">
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
     <%= f.label :second_name %><br />
     <%= f.text_field :second_name %>
   </div>
@@ -24,8 +28,8 @@
     <%= f.text_field :patronymic_name %>
   </div>
   <div class="field">
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday %>
+    <%= f.label :birth_date %><br />
+    <%= f.date_select :birth_date %>
   </div>
   <div class="actions">
     <%= f.submit %>
