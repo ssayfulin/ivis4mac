@@ -97,14 +97,19 @@ end
 #DataMapper.setup(:default, "sqlite3://#{File.expand_path(File.dirname(__FILE__))}/db.s3dbR)
 adapter = DataMapper.setup(:default, 'mysql://root:root@localhost/dm_development')
 #adapter.resource_naming_convention = DataMapper::NamingConventions::Resource::Underscored
-DataMapper.finalize
-DataMapper.auto_migrate!
+#DataMapper.finalize
+#DataMapper.auto_migrate!
 
 
 adapter = DataMapper.setup(:default, 'mysql://root:root@localhost/dm_test')
 #adapter.resource_naming_convention = DataMapper::NamingConventions::Resource::Underscored
 DataMapper.finalize
 DataMapper.auto_migrate!
+
+
+
+i = Incident.new(:incident_description=>RichText.new(:value=>"Some Description"))
+i.save
 
 
 

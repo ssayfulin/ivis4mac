@@ -2,5 +2,10 @@
 
 FactoryGirl.define do
   factory :incident do
-    end
+
+    first_name "MyString"
+    second_name "MyString"
+    patronymic_name "MyString"
+    birth_date "2012-03-11"
+  end
 end

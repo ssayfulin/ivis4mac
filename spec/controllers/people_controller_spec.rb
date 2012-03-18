@@ -24,11 +24,11 @@ describe PeopleController do
   # Person. As you add validations to Person, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { :first_name =>"MyString",
-      :last_name =>"MyString",
-      :second_name =>"MyString",
-      :patronymic_name =>"MyString",
-      :birth_date =>"2012-03-11"}
+    { :first_name =>"MyString3",
+      :last_name =>"MyString3",
+      :second_name =>"MyString3",
+      :patronymic_name =>"MyString3",
+      :birth_date =>"2002-03-11"}
   end
   
   # This should return the minimal set of values that should be in the session

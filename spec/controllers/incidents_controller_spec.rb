@@ -24,7 +24,9 @@ describe IncidentsController do
   # Incident. As you add validations to Incident, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+
+    {
+      :incident_registration_date =>"2002-03-11"}
   end
   
   # This should return the minimal set of values that should be in the session

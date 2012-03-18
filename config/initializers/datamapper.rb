@@ -15,8 +15,8 @@ end
 
 
 
-    if Rails.env=="production"
+ #   if Rails.env=="production"
 
   DataMapper.auto_migrate!
 
-end
+#end
