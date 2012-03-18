@@ -1,0 +1,21 @@
+<h1>Listing incident_types</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @incident_types.each do |incident_type| %>
+  <tr>
+    <td><%= link_to 'Show', incident_type %></td>
+    <td><%= link_to 'Edit', edit_incident_type_path(incident_type) %></td>
+    <td><%= link_to 'Destroy', incident_type, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Incident type', new_incident_type_path %>

@@ -1,0 +1,17 @@
+<%= form_for(@incident_map) do |f| %>
+  <% if @incident_map.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@incident_map.errors.count, "error") %> prohibited this incident_map from being saved:</h2>
+
+      <ul>
+      <% @incident_map.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

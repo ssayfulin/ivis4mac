@@ -1,0 +1,21 @@
+<h1>Listing incident_people</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @incident_people.each do |incident_person| %>
+  <tr>
+    <td><%= link_to 'Show', incident_person %></td>
+    <td><%= link_to 'Edit', edit_incident_person_path(incident_person) %></td>
+    <td><%= link_to 'Destroy', incident_person, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Incident person', new_incident_person_path %>

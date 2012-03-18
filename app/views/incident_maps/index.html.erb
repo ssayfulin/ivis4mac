@@ -1,0 +1,21 @@
+<h1>Listing incident_maps</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @incident_maps.each do |incident_map| %>
+  <tr>
+    <td><%= link_to 'Show', incident_map %></td>
+    <td><%= link_to 'Edit', edit_incident_map_path(incident_map) %></td>
+    <td><%= link_to 'Destroy', incident_map, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Incident map', new_incident_map_path %>

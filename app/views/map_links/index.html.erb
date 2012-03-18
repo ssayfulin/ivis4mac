@@ -1,0 +1,21 @@
+<h1>Listing map_links</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @map_links.each do |map_link| %>
+  <tr>
+    <td><%= link_to 'Show', map_link %></td>
+    <td><%= link_to 'Edit', edit_map_link_path(map_link) %></td>
+    <td><%= link_to 'Destroy', map_link, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Map link', new_map_link_path %>

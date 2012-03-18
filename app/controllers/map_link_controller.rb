@@ -1,0 +1,2 @@
+class MapLinkController < ApplicationController
+end

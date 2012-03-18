@@ -1,0 +1,21 @@
+<h1>Listing police_statements</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @police_statements.each do |police_statement| %>
+  <tr>
+    <td><%= link_to 'Show', police_statement %></td>
+    <td><%= link_to 'Edit', edit_police_statement_path(police_statement) %></td>
+    <td><%= link_to 'Destroy', police_statement, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Police statement', new_police_statement_path %>

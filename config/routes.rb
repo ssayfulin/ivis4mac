@@ -1,4 +1,20 @@
 Ivis4mac::Application.routes.draw do
+  resources :incidents
+
+  resources :incident_people
+
+  resources :rich_texts
+
+  resources :incident_maps
+
+  resources :police_statements
+
+  resources :incident_statuses
+
+  resources :incident_types
+
+  resources :map_links
+
   root :to => "home#index"
 
   resources :sign_types

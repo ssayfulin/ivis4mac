@@ -1,0 +1,2 @@
+module MapLinkHelper
+end
