@@ -5,6 +5,5 @@ class SignType
   property :sign_type, String
 
 
-  has n, :person_signs
-  has n, :persons, :through => :person_signs
+
 end

@@ -28,7 +28,7 @@ describe PeopleController do
       :last_name =>"MyString3",
       :second_name =>"MyString3",
       :patronymic_name =>"MyString3",
-      :birth_date =>"2002-03-11"}
+      :birthday =>"2002-03-11"}
   end
   
   # This should return the minimal set of values that should be in the session

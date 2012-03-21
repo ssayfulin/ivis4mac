@@ -108,11 +108,6 @@ DataMapper.auto_migrate!
 
 
 
-i = Incident.new(:incident_description=>RichText.new(:value=>"Some Description"))
-i.save
-
-
-
 
 
 

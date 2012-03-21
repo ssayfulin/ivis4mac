@@ -6,22 +6,21 @@ class Person
 
   property :second_name, String
   property :patronymic_name, String
-  property :birth_date, Date
+  property :birthday, Date
+  #
+  has n, :signs, :through => Resource
 
-  has n, :person_signs
-  has n, :sign_values, :through => :person_signs
-  has n, :sign_types, :through => :person_signs
 
 end
 
-class PersonSign
+class Sign
   include DataMapper::Resource
+  property :id, Serial
+  belongs_to :sign_value,  :required => true
+  belongs_to :sign_type,  :required => true
 
-  belongs_to :person,   :key => true
-  belongs_to :sign_value, :key => true
-  belongs_to :sign_type, :key => true
 
-
+  has n, :persons, :through => Resource
 
 end
 

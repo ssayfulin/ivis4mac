@@ -24,9 +24,8 @@ describe IncidentsController do
   # Incident. As you add validations to Incident, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
+    {:incident_registration_date=>"2002-03-11", :incident_type_id=>nil, :incident_description_id=>nil, :incident_extra_information_id=>nil, :person_coordinator_id=>nil, :person_registered_by_id=>nil, :police_statement_id=>nil}
 
-    {
-      :incident_registration_date =>"2002-03-11"}
   end
   
   # This should return the minimal set of values that should be in the session
@@ -38,6 +37,7 @@ describe IncidentsController do
 
   describe "GET index" do
     it "assigns all incidents as @incidents" do
+      puts valid_attributes
       incident = Incident.create! valid_attributes
       get :index, {}, valid_session
       assigns(:incidents).should eq([incident])

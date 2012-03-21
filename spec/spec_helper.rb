@@ -36,6 +36,9 @@ RSpec.configure do |config|
   config.expect_with :rspec
 
   config.include ActiveSupport::Testing::Assertions
+
+  #DataMapper::Logger.new(STDOUT, :debug)
+
   config.before(:suite) { DataMapper.auto_migrate! }
 
  # config.include RSpec::Rails::ControllerExampleGroup, :example_group => { :file_path => /\bspec[\\\/]controllers[\\\/]/ }
