@@ -2,7 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-DROP SCHEMA IF EXISTS `poiskdetei` ;
+DROP SCHEMA IF EXISTS `poiskdetei`;
 CREATE SCHEMA IF NOT EXISTS `poiskdetei` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 SHOW WARNINGS;
 USE `poiskdetei` ;
@@ -815,19 +815,19 @@ SHOW WARNINGS;
 DROP TABLE IF EXISTS `poiskdetei`.`person_to_contact` ;
 
 SHOW WARNINGS;
-CREATE  TABLE IF NOT EXISTS `poiskdetei`.`person_to_contact` (
+CREATE TABLE IF NOT EXISTS `poiskdetei`.`person_to_contact` (
   `id_person_contact` INT NOT NULL AUTO_INCREMENT ,
   `id_person` INT NOT NULL ,
   `id_contact` INT NOT NULL ,
   PRIMARY KEY (`id_person_contact`) ,
   INDEX `fk_id_contact` (`id_contact` ASC) ,
-  INDEX `fk_id_person` (`id_person` ASC) ,
+  INDEX `fk_id_person_a` (`id_person` ASC) ,
   CONSTRAINT `fk_id_contact`
     FOREIGN KEY (`id_contact` )
     REFERENCES `poiskdetei`.`contact` (`id_contact` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_id_person`
+  CONSTRAINT `fk_id_person_a`
     FOREIGN KEY (`id_person` )
     REFERENCES `poiskdetei`.`person` (`id_person` )
     ON DELETE NO ACTION
