@@ -6,7 +6,7 @@ class sign
 	function getSign($service, $idSign)
 	{
 		$result = null;
-		$request = "SELECT s.description, sd.description from sign as s, sign_detail as sd WHERE s.id_sign = '$idSign' AND s.id_sign = sd.id_sign";
+		$request = "SELECT s.description, sd.description FROM sign as s, sign_detail as sd WHERE s.id_sign = '$idSign' AND s.id_sign = sd.id_sign";
 
 		if($resultat=mysqli_query($service,$request))
 		{
@@ -37,5 +37,37 @@ class sign
     		die($message);
 		}
 	}
+	
+	// params : service - connected Database; idSign; idSignDetail
+	function addNewSign($service, $idSign, $idSignDetail)
+	{
+		$query = "INSERT INTO sign_detail VALUES(null,'$idSign','$idSignDetail')";
+		$result = mysqli_query($service,$query);
+		if (!$result) 
+		{
+    		$message  = 'Invalid query: ' . mysql_error() . "\n";
+    		$message .= 'Whole query: ' . $query;
+    		die($message);
+		}
+	}
+	
+	// params : service - connected Database; idSign; description - description the sign
+	function hasSameSign($service, $idSign, $description)
+	{
+		$query = "SELECT s.description, sd.description FROM sign as s, sign_detail as sd WHERE s.id_sign = '$idSign' AND s.id_sign = sd.id_sign AND sd.description = '$description'";
+		if($resultat = mysqli_query($service,$request))
+		{
+			return true;
+		} else 
+		{
+			return false;
+		}	
+	}
+	function test()
+	{
+		return "true";
+	}
+
+	
 }
 ?> 
