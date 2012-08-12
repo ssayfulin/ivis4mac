@@ -1,0 +1,42 @@
+.addSignBox
+{
+        display:inline-block;
+        border:1px solid black;
+        background:#abc3ea;
+}
+
+.onglet a
+{
+        color:#000000;
+        text-decoration:none;
+}
+.onglet_n
+{
+        background:#bbbbbb;
+        border-bottom:1px solid black;
+}
+.onglet_y
+{
+        background:#dddddd;
+        border-bottom:0px solid black;
+        padding-bottom:4px;
+}
+.contenu
+{
+        background-color:#dddddd;
+        border:1px solid black;
+        margin-top:-1px;
+        padding:5px;
+}
+ul
+{
+        margin-top:0px;
+        margin-bottom:0px;
+        margin-left:-10px
+}
+h1
+{
+        margin:0px;
+        padding:0px;
+}
+
