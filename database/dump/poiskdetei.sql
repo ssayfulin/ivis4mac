@@ -3,7 +3,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 DROP SCHEMA IF EXISTS `poiskdetei`;
-CREATE SCHEMA IF NOT EXISTS `poiskdetei` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
+CREATE SCHEMA IF NOT EXISTS `poiskdetei` DEFAULT CHARACTER SET cp1251 COLLATE cp1251_general_ci ;
 SHOW WARNINGS;
 USE `poiskdetei` ;
 
@@ -133,7 +133,7 @@ CREATE  TABLE IF NOT EXISTS `poiskdetei`.`address` (
   `id_district` INT NOT NULL ,
   `id_city` INT NOT NULL ,
   `id_address_type` INT NOT NULL ,
-  `street_home` TINYTEXT NULL DEFAULT NULL COMMENT 'adress:  raion,street,nВ° buiding ets' ,
+  `street_home` TINYTEXT NULL DEFAULT NULL COMMENT 'adress:  raion,street,n° buiding ets' ,
   `latitude` DOUBLE NULL DEFAULT NULL ,
   `longitude` DOUBLE NULL DEFAULT NULL ,
   PRIMARY KEY (`id_address`) ,
@@ -425,7 +425,7 @@ SHOW WARNINGS;
 CREATE  TABLE IF NOT EXISTS `poiskdetei`.`sign_detail` (
   `id_sign_detail` INT NOT NULL AUTO_INCREMENT ,
   `id_sign` INT NOT NULL ,
-  `description` TEXT NULL DEFAULT NULL COMMENT '(rost)РІС‹СЃРѕРєРёР№, (telo)РєСЂРµРїРєРѕРіРѕ С‚РµР»РѕСЃР»РѕР¶РµРЅРёСЏ,( РІРѕР»РѕСЃС‹) Рё (СѓСЃС‹) СЃРµРґС‹Рµ' ,
+  `description` TEXT NULL DEFAULT NULL COMMENT '(rost)высокий, (telo)крепкого телосложения,( волосы) и (усы) седые' ,
   PRIMARY KEY (`id_sign_detail`),
   FOREIGN KEY (`id_sign` )
     REFERENCES `poiskdetei`.`sign` (`id_sign` )
@@ -835,10 +835,31 @@ CREATE TABLE IF NOT EXISTS `poiskdetei`.`person_to_contact` (
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
+-- ----------------------------------------------------------------
+-- table `poiskdetei`.`menu`
+-- ----------------------------------------------------------------
+CREATE TABLE `menu` (
+  `id` INT(11) NOT NULL COMMENT 'код меню',
+  `name` VARCHAR(45) CHARACTER SET utf8 NOT NULL COMMENT 'название меню',
+  `link` VARCHAR(100) CHARACTER SET utf8 NOT NULL COMMENT 'Адрес куда ведет меню',
+  PRIMARY KEY (`id`)
+) COMMENT='Таблица бокового меню';
 
-INSERT INTO `sign_detail` VALUES(1, 1, 'РЅР° РІРёРґ 7 Р»РµС‚');
-INSERT INTO `sign_detail` VALUES(2, 1, 'РЅР° РІРёРґ 11-12 Р»РµС‚');
-INSERT INTO `sign_detail` VALUES(3, 1, 'РЅР° РІРёРґ 4 РіРѕРґР°');
+-- ----------------------------------------------------------------
+-- table `poiskdetei`.`top_menu`
+-- ----------------------------------------------------------------
+
+CREATE TABLE `top_menu` (
+  `id` INT(11) NOT NULL COMMENT 'код меню',
+  `parent_menu` INT(11) NOT NULL COMMENT 'код родительского меню',
+  `name` VARCHAR(45) CHARACTER SET utf8 NOT NULL COMMENT 'название меню',
+  `link` VARCHAR(100) CHARACTER SET utf8 NOT NULL COMMENT 'Адрес куда ведет меню',
+  PRIMARY KEY (`id`)
+) COMMENT='Таблица верхнего меню';
+
+INSERT INTO `sign_detail` VALUES(1, 1, 'на вид 7 лет');
+INSERT INTO `sign_detail` VALUES(2, 1, 'на вид 11-12 лет');
+INSERT INTO `sign_detail` VALUES(3, 1, 'на вид 4 года');
 
 INSERT INTO `sign_detail` VALUES(4, 2, '90-95 cm');
 INSERT INTO `sign_detail` VALUES(5, 2, '148 cm');
@@ -847,37 +868,35 @@ INSERT INTO `sign_detail` VALUES(7, 2, '117-120 cm');
 INSERT INTO `sign_detail` VALUES(8, 2, '160 cm');
 INSERT INTO `sign_detail` VALUES(9, 2, '125 cm');
 
-INSERT INTO `sign_detail` VALUES(10, 4, 'СЃСЂРµРґРЅРµРіРѕ');
-INSERT INTO `sign_detail` VALUES(11, 4, 'С…СѓРґРѕС‰Р°РІРѕРіРѕ');
+INSERT INTO `sign_detail` VALUES(10, 4, 'среднего');
+INSERT INTO `sign_detail` VALUES(11, 4, 'худощавого');
 
-INSERT INTO `sign_detail` VALUES(12, 11, 'РѕРІР°Р»СЊРЅРѕРµ');
-INSERT INTO `sign_detail` VALUES(13, 10, 'РІ РІРµСЃРЅСѓС€РєР°С…');
+INSERT INTO `sign_detail` VALUES(12, 11, 'овальное');
+INSERT INTO `sign_detail` VALUES(13, 10, 'в веснушках');
 
-INSERT INTO `sign_detail` VALUES(14, 14, 'РєРѕСЂРѕС‚РєРёРµ');
-INSERT INTO `sign_detail` VALUES(15, 12, 'СЃРІРµС‚Р»Рѕ-СЂСѓСЃС‹Рµ');
-INSERT INTO `sign_detail` VALUES(16, 12, 'СЂСѓСЃС‹Рµ');
-INSERT INTO `sign_detail` VALUES(17, 14, 'РґР»РёРЅРЅС‹Рµ');
-INSERT INTO `sign_detail` VALUES(18, 12, 'СЃРІРµС‚Р»С‹Рµ');
-INSERT INTO `sign_detail` VALUES(19, 14, 'РЅРёР¶Рµ РїР»РµС‡');
+INSERT INTO `sign_detail` VALUES(14, 14, 'короткие');
+INSERT INTO `sign_detail` VALUES(15, 12, 'светло-русые');
+INSERT INTO `sign_detail` VALUES(16, 12, 'русые');
+INSERT INTO `sign_detail` VALUES(17, 14, 'длинные');
+INSERT INTO `sign_detail` VALUES(18, 12, 'светлые');
+INSERT INTO `sign_detail` VALUES(19, 14, 'ниже плеч');
 
-INSERT INTO `sign_detail` VALUES(20, 13, 'РІРѕР»РЅРёСЃС‚С‹Рµ');
-INSERT INTO `sign_detail` VALUES(21, 13, 'РїСЂСЏРјС‹Рµ');
+INSERT INTO `sign_detail` VALUES(20, 13, 'волнистые');
+INSERT INTO `sign_detail` VALUES(21, 13, 'прямые');
 
-INSERT INTO `sign_detail` VALUES(22,  5, 'РіРѕР»СѓР±С‹Рµ');
-INSERT INTO `sign_detail` VALUES(23,  5, 'СЃРµСЂРѕ-Р·РµР»С‘РЅС‹Рµ');
+INSERT INTO `sign_detail` VALUES(22,  5, 'голубые');
+INSERT INTO `sign_detail` VALUES(23,  5, 'серо-зелёные');
 
-INSERT INTO `sign_detail` VALUES(24, 17, 'Р±РѕР»СЊС€РёРµ');
-INSERT INTO `sign_detail` VALUES(25, 17, 'СЃ РїСЂРѕРєРѕР»РѕРј');
+INSERT INTO `sign_detail` VALUES(24, 17, 'большие');
+INSERT INTO `sign_detail` VALUES(25, 17, 'с проколом');
 
-INSERT INTO `sign_detail` VALUES(26, 9, 'РіСѓСЃС‚С‹Рµ');
-INSERT INTO `sign_detail` VALUES(27, 8, 'РґСѓРіРѕРѕР±СЂР°Р·РЅС‹Рµ');
+INSERT INTO `sign_detail` VALUES(26, 9, 'густые');
+INSERT INTO `sign_detail` VALUES(27, 8, 'дугообразные');
 
-INSERT INTO `sign_detail` VALUES(28, 19, 'РЅР° Р»Р±Сѓ С€СЂР°Рј РґР»РёРЅРЅРѕР№ 2 СЃРј');
-INSERT INTO `sign_detail` VALUES(29, 19, 'РЅР° РїСЂР°РІРѕР№ СЂСѓРєРµ РЅР° РЅРёР¶РЅРµР№ С„Р°Р»Р°РЅРіРµ СѓРєР°Р·Р°С‚РµР»СЊРЅРѕРіРѕ РїР°Р»СЊС†Р° СЃ РІРЅРµС€РЅРµР№ СЃС‚РѕСЂРѕРЅС‹ РѕР¶РѕРі РѕС‚ СѓС‚СЋРіР°, РІРЅРёР·Сѓ Р¶РёРІРѕС‚Р° Сѓ Р»РµРІРѕР№ РЅРѕРіРё СЂРѕРґРёРЅРєР° 0,5 СЃРј РєСЂСѓРіР»РѕР№ С„РѕСЂРјС‹, РЅР° Р¶РёРІРѕС‚Рµ СЃР»РµРґ РѕС‚ РѕСЃРїС‹ РІ РІРёРґРµ РІС‹РїСѓРєР»РѕРіРѕ Р±РµР»РѕРіРѕ РїСЏС‚РЅР°');
-INSERT INTO `sign_detail` VALUES(30, 19, 'С€СЂР°Рј РЅР° Р»Р±Сѓ');
-INSERT INTO `sign_detail` VALUES(31, 19, 'РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‚ РґРІР° РІРµСЂС…РЅРёС… Рё РґРІР° РЅРёР¶РЅРёС… Р·СѓР±Р°, С†Р°СЂР°РїРёРЅР° РЅР° РїСЂР°РІРѕР№ С‰РµРєРµ');
-
-
+INSERT INTO `sign_detail` VALUES(28, 19, 'на лбу шрам длинной 2 см');
+INSERT INTO `sign_detail` VALUES(29, 19, 'на правой руке на нижней фаланге указательного пальца с внешней стороны ожог от утюга, внизу живота у левой ноги родинка 0,5 см круглой формы, на животе след от оспы в виде выпуклого белого пятна');
+INSERT INTO `sign_detail` VALUES(30, 19, 'шрам на лбу');
+INSERT INTO `sign_detail` VALUES(31, 19, 'отсутствуют два верхних и два нижних зуба, царапина на правой щеке');
 
 
 
@@ -885,34 +904,36 @@ INSERT INTO `sign_detail` VALUES(31, 19, 'РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‚ РґРІР° РІРµСЂС…
 
 
 
-INSERT INTO `sign` VALUES(1, 'РІРѕР·СЂР°СЃС‚');
-INSERT INTO `sign` VALUES(2, 'СЂРѕСЃС‚');
-INSERT INTO `sign` VALUES(3, 'РІРµСЃ');
-INSERT INTO `sign` VALUES(4, 'С‚РµР»РѕСЃР»РѕР¶РµРЅРёРµ');
-INSERT INTO `sign` VALUES(5, 'С†РІРµС‚ РіР»Р°Р·');
-INSERT INTO `sign` VALUES(6, 'С„РѕСЂРјР° РіР»Р°Р·');
-INSERT INTO `sign` VALUES(7, 'СЂР°Р·РјРµСЂ РіР»Р°Р·');
-INSERT INTO `sign` VALUES(8, 'С„РѕСЂРјР° Р±СЂРѕРІРµР№');
-INSERT INTO `sign` VALUES(9, 'С‚РёРї Р±СЂРѕРІРµР№');
-INSERT INTO `sign` VALUES(10, 'С‚РёРї Р»РёС†Р°');
-INSERT INTO `sign` VALUES(11, 'С„РѕСЂРјР° Р»РёС†Р°');
-INSERT INTO `sign` VALUES(12, 'С†РІРµС‚ РІРѕР»РѕСЃ');
-INSERT INTO `sign` VALUES(13, 'С‚РёРї РІРѕР»РѕСЃ');
-INSERT INTO `sign` VALUES(14, 'РґР»РёРЅРЅР° РІРѕР»РѕСЃ');
-INSERT INTO `sign` VALUES(15, 'С†РІРµС‚ СѓСЃРѕРІ');
-INSERT INTO `sign` VALUES(16, 'С„РѕСЂРјР° СѓСЃРѕРІ');
-INSERT INTO `sign` VALUES(17, 'СѓС€РЅС‹Рµ СЂР°РєРѕРІРёРЅС‹');
-INSERT INTO `sign` VALUES(18, 'С†РІРµС‚ РєРѕР¶Рё');
-INSERT INTO `sign` VALUES(19, 'РѕСЃРѕР±С‹Рµ РїСЂРёРјРµС‚С‹');
+
+
+INSERT INTO `sign` VALUES(1, 'возраст');
+INSERT INTO `sign` VALUES(2, 'рост');
+INSERT INTO `sign` VALUES(3, 'вес');
+INSERT INTO `sign` VALUES(4, 'телосложение');
+INSERT INTO `sign` VALUES(5, 'цвет глаз');
+INSERT INTO `sign` VALUES(6, 'форма глаз');
+INSERT INTO `sign` VALUES(7, 'размер глаз');
+INSERT INTO `sign` VALUES(8, 'форма бровей');
+INSERT INTO `sign` VALUES(9, 'тип бровей');
+INSERT INTO `sign` VALUES(10, 'тип лица');
+INSERT INTO `sign` VALUES(11, 'форма лица');
+INSERT INTO `sign` VALUES(12, 'цвет волос');
+INSERT INTO `sign` VALUES(13, 'тип волос');
+INSERT INTO `sign` VALUES(14, 'длинна волос');
+INSERT INTO `sign` VALUES(15, 'цвет усов');
+INSERT INTO `sign` VALUES(16, 'форма усов');
+INSERT INTO `sign` VALUES(17, 'ушные раковины');
+INSERT INTO `sign` VALUES(18, 'цвет кожи');
+INSERT INTO `sign` VALUES(19, 'особые приметы');
 
 
 
-INSERT INTO `person` VALUES(1, 'РўРёС€РєРёРЅР°', 'РСЂРёРЅР°', NULL, NULL);
-INSERT INTO `person` VALUES(2, 'РљРѕСЃС‚СЋРЅРёРЅ', 'РџР°РІР»РёРє', NULL, NULL);
-INSERT INTO `person` VALUES(3, 'Р§РµС‚РёРЅР°', 'РљР°С‚РµСЂРёРЅР°', NULL, NULL);
-INSERT INTO `person` VALUES(4, 'РђРЅРёСЃРёРјРѕРІР° ', 'РљР°С‚РµСЂРёРЅР°', NULL, NULL);
-INSERT INTO `person` VALUES(5, 'Р‘РµСЃРїСЂРѕР·РІР°РЅРЅР°СЏ', 'РћР»СЊРіР°', NULL, NULL);
-INSERT INTO `person` VALUES(6, 'РљРѕСЂРѕР»РµРІ ', 'РњР°РєСЃРёРј', NULL, NULL);
+INSERT INTO `person` VALUES(1, 'Тишкина', 'Ирина', NULL, NULL);
+INSERT INTO `person` VALUES(2, 'Костюнин', 'Павлик', NULL, NULL);
+INSERT INTO `person` VALUES(3, 'Четина', 'Катерина', NULL, NULL);
+INSERT INTO `person` VALUES(4, 'Анисимова ', 'Катерина', NULL, NULL);
+INSERT INTO `person` VALUES(5, 'Беспрозванная', 'Ольга', NULL, NULL);
+INSERT INTO `person` VALUES(6, 'Королев ', 'Максим', NULL, NULL);
 
 
 
