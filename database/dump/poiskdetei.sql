@@ -5,7 +5,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 DROP SCHEMA IF EXISTS `poiskdetei`;
 CREATE SCHEMA IF NOT EXISTS `poiskdetei` DEFAULT CHARACTER SET cp1251 COLLATE cp1251_general_ci ;
 SHOW WARNINGS;
-USE `poiskdetei` ;
+USE `poiskdetei`;
 
 -- -----------------------------------------------------
 -- Table `poiskdetei`.`person`
@@ -851,7 +851,7 @@ CREATE TABLE `menu` (
 
 CREATE TABLE `top_menu` (
   `id` INT(11) NOT NULL COMMENT 'код меню',
-  `parent_menu` INT(11) NOT NULL COMMENT 'код родительского меню',
+  `parent_id` INT(11) NOT NULL COMMENT 'код родительского меню',
   `name` VARCHAR(45) CHARACTER SET utf8 NOT NULL COMMENT 'название меню',
   `link` VARCHAR(100) CHARACTER SET utf8 NOT NULL COMMENT 'Адрес куда ведет меню',
   PRIMARY KEY (`id`)
