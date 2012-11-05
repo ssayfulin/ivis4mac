@@ -43,9 +43,9 @@ $connect->closeConnection($service);
 function showSign($value,$idSign)
 {
 	echo "<b> $value[0] </b>";
-	echo '<input type="button" value="add" >';
+	echo '<input type="button" value="add" onClick="onClickAddButton()">';
 	// if admin => can edit sign
-	echo '<input type="button" value="edit" >';
+	echo '<input type="button" value="edit" disabled="false" onClick="onClickEditButton()">';
 	echo "<br>";
 	$b = $value[1];
 	echo '<select id="list" name='.$idSign.' onChange="onChange()">';
@@ -54,7 +54,7 @@ function showSign($value,$idSign)
 		$show = $b[$i];
 		echo "<option value=".$i.">".$show."</option>";
 	}
-	echo '<option value=".$i++.">добавить</option>';
+//	echo '<option value=".$i++.">добавить</option>';
 	echo "</select>";
 };
 
@@ -62,6 +62,15 @@ function showSign($value,$idSign)
 <div id="textDiv"/>
 <script type="text/javascript">
 
+	function onClickEditButton()
+	{
+		// TODO : edit sign 
+	}
+	
+	function onClickAddButton()
+	{
+		testAddTag();
+	}
 	function onChange()
 	{
 		var text = document.getElementById('list').options[document.getElementById('list').selectedIndex].text;
@@ -72,7 +81,7 @@ function showSign($value,$idSign)
 		// selected last item
 		if(listSize - 1 == selectedIndex)
 		{
-			testAddTag();
+			// testAddTag();
 		}else
 		{
 			// TODO : select normal	

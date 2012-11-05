@@ -15,15 +15,39 @@ $connect = new connect();
 $service = $connect->setConnection();
 
 $pr = new sign();
-$a = $pr->getSign($service, 6);
-showSign($a);
+ 
+echo "<table><tr>";
 
-$a = $pr->getSign($service, 5);
-showSign($a);
+// $a = $pr->getSign($service, 1);
+// showSign($a);
 
-$a = $pr->getSign($service, 2);
-showSign($a);
-	
+// echo "</td><td>";
+// $a = $pr->getSign($service, 2);
+// showSign($a);
+// echo "</td><td>";
+
+// $a = $pr->getSign($service, 3);
+// showSign($a);
+// echo "</td><td>";
+// $a = $pr->getSign($service, 4);
+// showSign($a);
+// echo "</td><td>";
+// $a = $pr->getSign($service, 5);
+// showSign($a);
+// echo "</td><td>";
+// $a = $pr->getSign($service, 6);
+// showSign($a);
+// echo "</td><td>";
+
+for($k=0; $k < 19; $k++)
+{
+	echo "<td>";
+	$a = $pr->getSign($service, $k);
+	showSign($a);
+	echo "</td>";
+}
+
+echo "</tr></table>";
 	
 $pr->setSign($service,2,2,1);	
 	
@@ -31,23 +55,21 @@ $pr->setSign($service,2,2,1);
 $connect->closeConnection($service);
 
 
-
-
 function showSign($value)
 {
-	echo "<p>-------------</p>";	
 	echo "<b> $value[0] </b>";
 	echo "<br>";
 	$b = $value[1];
+	echo "<select>";
 	for($i=0; $i < sizeof($b); $i++)
 	{
 		$show = $b[$i];
-		echo "<br>";
-		echo $show;
+		echo "<option value=".$i.">".$show."</option>";
 	}
+	echo "<option value=".$i++.">добавить</option>";
+	echo "</select>";
 };
-?> 
 
-
+?>
 	</body>
 </html>

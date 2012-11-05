@@ -12,7 +12,7 @@ class connect {
 		mysqli_query($this->result,$charset);
 		if($this->result)
 		{
-			print("connection =>ok");
+			print("connection => ok");
 		}
 		return  $this->result;
 	}
