@@ -1,0 +1,24 @@
+Shell command for get the data from
+- locs1-2.csv to location1-2.sql
+cat locs1-2.csv | while read a b c d; do echo "INSERT INTO location VALUES ( null, $a, '$c' ,$d ) ;"; done > location1-2.sql
+
+- locs2-2.csv to location2-2.sql
+cat locs2-2.csv | while read a b c d; do echo "INSERT INTO location VALUES ( null, $a, '$c' ,$d ) ;"; done > location2-2.sql
+
+- regs.csv to region.sql
+ cat regs.csv | while read a b c d e; do echo "INSERT INTO region VALUES ($b, '$d', '$e');"; done > region.sql
+
+--
+-- Structure de la table `location`
+--
+
+CREATE TABLE `location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `number` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `region_id` int(3) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+
+
